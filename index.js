@@ -1,8 +1,18 @@
 const express = require('express');
+const service = require("./service/service")
 const app = Express();
 const PORT = 3000;
 
-app.get('/', (req, res) => {
+app.use(express.json());
+
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+app.get('/', async (req, res) => {
+  await service.getData();
   return res.status(200).json('Rota GET')
 });
 
